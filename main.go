@@ -35,7 +35,7 @@ func fetch() []User {
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// Parse HTML template file
-		tmpl := template.Must(template.ParseFiles("page.templ"))
+		tmpl := template.Must(template.ParseFiles("page.html"))
 		// Fetch users from the database
 		users := fetch()
 		// Create DataStructure instance with fetched users
