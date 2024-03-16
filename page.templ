@@ -8,11 +8,15 @@
   <body>
     <div>
       <ul>
-        {{ range .Info }}
+        {{
+          range.Info
+        }}
         <!-- Iterate over each user in the 'Info' slice -->
         <li>{{ .ID }} - {{ .Name }}</li>
         <!-- Display user's ID and Name -->
-        {{ end }}
+        {{
+          end
+        }}
       </ul>
     </div>
   </body>
