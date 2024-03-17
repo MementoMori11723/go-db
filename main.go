@@ -1,9 +1,10 @@
 package main
 
 import (
-	"html/template"
+	"fmt"
 	"net/http"
 
+	"github.com/a-h/templ"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -33,18 +34,10 @@ func fetch() []User {
 }
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		// Parse HTML template file
-		tmpl := template.Must(template.ParseFiles("page.html"))
-		// Fetch users from the database
-		users := fetch()
-		// Create DataStructure instance with fetched users
-		data := DataStructure{
-			Info: users,
-		}
-		// Execute the template with the data and write to response writer
-		tmpl.Execute(w, data)
-	})
+	data := fetch()
+	component := hello(data)
+	http.Handle("/",templ.Handler(component))
 	// Start the HTTP server
+	fmt.Println("Listening on :5000")
 	http.ListenAndServe(":5000", nil)
 }
